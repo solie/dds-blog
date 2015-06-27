@@ -11,7 +11,7 @@ defmodule DdsBlog.Handler do
   end
 
   def render_and_generate_response({:ok, file}, params) do
-    content = Markdown.to_html file
+    content = Earmark.to_html file
     title = String.capitalize(params[:param])
     socials = EEx.eval_file "priv/themes/social_buttons.html.eex"
     back = EEx.eval_file "priv/themes/back_button.html.eex"
@@ -54,7 +54,7 @@ defmodule DdsBlog.Handler do
   def print_articles([h|t], index_contents) do
     {:ok, article} = File.read "priv/contents/" <> h
     sliced = String.slice article, 0, 1000
-    marked = Markdown.to_html sliced
+    marked = Earmark.to_html sliced
     filename = Path.basename(h, ".md")
     more = EEx.eval_file "priv/themes/more_button.html.eex", [filename: filename]
     print_articles t, index_contents <> marked <> more

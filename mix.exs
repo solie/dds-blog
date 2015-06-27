@@ -16,7 +16,7 @@ defmodule DdsBlog.Mixfile do
   defp deps do
     [
       {:cowboy, "1.0.0"},
-      {:markdown, github: "devinus/markdown"},
+      {:earmark, ">= 0.1.17"},
       {:timex, "0.13.3"}
     ]
   end
